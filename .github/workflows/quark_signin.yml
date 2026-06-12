@@ -13,11 +13,11 @@ jobs:
       skip: ${{ steps.check.outputs.skip }}
     steps:
       - name: 检出代码
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: 恢复签到成功记录缓存
         id: cache-success-restore
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: .last_success_date
           key: last-success-marker
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       - name: 随机延迟（早上）
         if: github.event.schedule == '0 1 * * *'
@@ -64,7 +64,7 @@ jobs:
           sleep $delay
 
       - name: 设置Python环境
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
           python-version: '3.x'
 
@@ -85,7 +85,7 @@ jobs:
 
       - name: 保存成功记录到缓存
         if: success()
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: .last_success_date
           key: last-success-marker
